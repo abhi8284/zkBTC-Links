@@ -10,6 +10,7 @@ app.use(express.json())
 
 app.get('/', controllers.test)
 app.post('/generateEthTransferBlink', controllers.generateBTCTransferBTClink)
+app.post('/generateBRC20TransferBlink', controllers.generateBRC20TransferBTClink)
 app.post('/storeToIpfs', controllers.storeToIpfsviapinata)
 
 app.listen(port, () => {
