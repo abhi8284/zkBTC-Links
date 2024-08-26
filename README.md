@@ -1,6 +1,6 @@
 ## What Are Bitcoin Links (BTC-Links)?
 
-Bitcoin Links (BTC-Links) is a project that aims to make Bitcoin transactions and interactions more accessible to web2 users by providing a simple and intuitive interface. Inspired by Solana's Blinks and Actions, BTC-Links allows users to perform various Bitcoin-related actions, such as transferring Runes and BRC-20 tokens, from any supported network with ease.
+Bitcoin Links (BTC-Links) is a project that aims to make Bitcoin transactions and interactions more accessible to web2 users by providing a simple and intuitive interface. Inspired by Solana's Blinks and Actions, BTC-Links allows users to perform various Bitcoin-related actions, such as transferring Runes and BRC-20 tokens, from any supported Bitcoin L2 networks with ease. Including Zk-BTC , BEVM etc.
 
 ## Key Features of BTC-Links
 
