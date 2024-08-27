@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ['s2.coinmarketcap.com', 'another-domain.com', 'example.com', 'assets.coingecko.com', 'raw.githubusercontent.com'],
+  },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>

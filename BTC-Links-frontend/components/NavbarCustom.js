@@ -16,7 +16,7 @@ const NavbarCustom = () => {
           <StyledNavLink href="/team">Team</StyledNavLink>
           <StyledNavLink href="/overview">Overview</StyledNavLink>
         </Nav>
-        <button className='launch-app-button' style={{marginLeft:'20px'}}>See Blinker Examples</button>
+        <button className='launch-app-button' style={{ marginLeft: '20px' }}>See Blinker Examples</button>
       </Navbar.Collapse>
     </StyledNavbar>
   );
