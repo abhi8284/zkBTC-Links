@@ -1,9 +1,7 @@
 import Image from "next/image";
 import logo from "@/assets/logosaas.png";
 import SocialX from "@/assets/social-x.svg";
-import SocialInsta from "@/assets/social-insta.svg";
 import SocialLinkedIn from "@/assets/social-linkedin.svg";
-import SocialPin from "@/assets/social-pin.svg";
 import SocialYoutube from "@/assets/social-youtube.svg";
 
 export const Footer = () => {
@@ -19,17 +17,15 @@ export const Footer = () => {
           <a href="#">Customers</a>
           <a href="#">Pricing</a>
           <a href="#">Help</a>
-          <a href="#">Careers</a>
+          {/* <a href="#">Careers</a> */}
         </nav>
         <div className="flex justify-center gap-6 mt-6">
           <SocialX />
-          <SocialInsta />
           <SocialLinkedIn />
-          <SocialPin />
           <SocialYoutube />
         </div>
         <p className="mt-6">
-          &copy; 2024 Your Company, Inc. All rights reserved.
+          &copy; 2024 BTC-Links, Inc. All rights reserved.
         </p>
       </div>
     </footer>
