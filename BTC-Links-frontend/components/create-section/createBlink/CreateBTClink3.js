@@ -25,7 +25,7 @@ function CreateBlink3({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
 
   const copySocialLink = async () => {
     try {
-      const url = '<blk ipfs://'+newIPFShash+' blk>'
+      const url = '<btclink ipfs://'+newIPFShash+' btclink>'
       await navigator.clipboard.writeText(url);
       setSocialLinkCopied(true);
       setTimeout(() => setSocialLinkCopied(false), 2000);
@@ -36,7 +36,7 @@ function CreateBlink3({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
 
   return (
     <div style={{  padding: '5px', zoom: '0.68' }}>
-      <h4>Your Blink Is Ready</h4>
+      <h4>Your BTCLink Is Ready</h4>
       <a style={{ fontSize: '1.1em' }}>It has been deployed and can be accessed via IPFS using the link below</a>
       <div style={{ marginTop: '12px', display: 'flex', gap: '10px' }}>
         <button
