@@ -71,9 +71,9 @@ const ScrollHorizontal = () => {
   }, [isScrolling]);
 
   const sections = [
-    <CreateBlink1 currentBlinkObject={currentBlinkObject} setCurrentBlinkObject={setCurrentBlinkObject} handleNextClick={handleNextClick} />,
-    <CreateBlink2 currentBlinkObject={currentBlinkObject} setCurrentBlinkObject={setCurrentBlinkObject} handleNextClick={handleNextClick} setNewIPFShash={setNewIPFShash} ewIPFShash={newIPFShash} />,
-    <CreateBlink3 currentBlinkObject={currentBlinkObject} setCurrentBlinkObject={setCurrentBlinkObject} handleNextClick={handleNextClick} newIPFShash={newIPFShash} />
+    <CreateBlink1 currentBlinkObject={currentBlinkObject} setCurrentBlinkObject={setCurrentBlinkObject} handleNextClick={handleNextClick} key={1} />,
+    <CreateBlink2 currentBlinkObject={currentBlinkObject} setCurrentBlinkObject={setCurrentBlinkObject} handleNextClick={handleNextClick} setNewIPFShash={setNewIPFShash} ewIPFShash={newIPFShash} key={2} />,
+    <CreateBlink3 currentBlinkObject={currentBlinkObject} setCurrentBlinkObject={setCurrentBlinkObject} handleNextClick={handleNextClick} newIPFShash={newIPFShash} key={3} />
   ];
 
   return (

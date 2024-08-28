@@ -39,15 +39,15 @@ function updateIdsInJsCode(jsCode, number) {
   });
 }
 
-async function replaceBlkTags() {
-  // Find all span elements containing <blk ... blk> or &lt;blk ... blk&gt;
+async function replacebtclinkTags() {
+  // Find all span elements containing <btclink ... btclink> or &lt;btclink ... btclink&gt;
   const spans = document.querySelectorAll('span');
 
   const fetchPromises = [];
   spans.forEach(span => {
-    const blkRegex = /(&lt;|<)blk\s*(.*?)\s*blk(&gt;|>)/g;
+    const btclinkRegex = /(&lt;|<)btclink\s*(.*?)\s*btclink(&gt;|>)/g;
     let match;
-    while ((match = blkRegex.exec(span.innerHTML)) !== null) {
+    while ((match = btclinkRegex.exec(span.innerHTML)) !== null) {
       let url = null;
       const match2 = match;
       const url1 = match[2].trim();
@@ -115,4 +115,4 @@ async function replaceBlkTags() {
 })();
 
 // Run the function every 1 second
-setInterval(replaceBlkTags, 1000);
+setInterval(replacebtclinkTags, 1000);
