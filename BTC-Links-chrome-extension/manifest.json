@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "Replace btclink Tags with HTML and render on X and other social media",
+  "version": "1.0",
+  "description": "Fetches HTML content from IPFS URLs within custom btclink tags and replaces the tags with the fetched HTML.",
+  "permissions": [
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.x.com/*"
+      ],
+      "js": [
+        "content.js",
+        "react.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+}
