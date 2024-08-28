@@ -1,263 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Donation Page</title>
     <style>
-        .card {
-            position: relative;
-            background-color: white;
-            border-radius: 15px;
-            padding: 10px;
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-top: -20px;
+      .card {
+        position: relative;
+        background-color: white;
+        border-radius: 15px;
+        padding: 10px;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: -20px;
+      }
+
+      .card img {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 15px;
+        margin-bottom: -5px;
+      }
+
+      .content {
+        background-color: #f7f9fa;
+        border-radius: 12px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-top: 5px;
+      }
+
+      .input {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        padding: 8px;
+        gap: 5px;
+      }
+
+      .input img {
+        width: 24px;
+        height: 24px;
+      }
+
+      input[type="number"] {
+        border: none;
+        background-color: transparent;
+        font-size: 16px;
+        flex: 1;
+        padding: 8px;
+      }
+      input[type="text"] {
+        border: none;
+        background-color: transparent;
+        font-size: 16px;
+        flex: 1;
+        padding: 8px;
+      }
+
+      button {
+        background-color: #1da1f2;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      button:hover {
+        background-color: #0f8de8;
+      }
+
+      button:disabled,
+      .predefined-button:disabled {
+        cursor: not-allowed;
+        background-color: #ccc;
+      }
+
+      button.loading,
+      .predefined-button.loading {
+        background-image: linear-gradient(
+          90deg,
+          #0099ff 0%,
+          #ff66cc 50%,
+          #0099ff 100%
+        );
+        background-size: 200% 100%;
+        animation: gradient-animation 1s linear infinite;
+      }
+
+      button.success {
+        background-color: #4caf50;
+      }
+
+      .checkmark {
+        color: white;
+        font-size: 24px;
+        margin-right: 8px;
+      }
+
+      .predefined-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+      }
+
+      .predefined-button {
+        flex: 1;
+        margin: 0 5px;
+      }
+
+      @keyframes gradient-animation {
+        0% {
+          background-position: 100% 0;
         }
 
-        .card img {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: -5px;
+        100% {
+          background-position: -100% 0;
         }
-
-        .content {
-            background-color: #f7f9fa;
-            border-radius: 12px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            margin-top: 5px;
-        }
-
-        .input {
-            display: flex;
-            align-items: center;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 12px;
-            padding: 8px;
-            gap: 5px;
-        }
-
-        .input img {
-            width: 24px;
-            height: 24px;
-        }
-
-        input[type='number'] {
-            border: none;
-            background-color: transparent;
-            font-size: 16px;
-            flex: 1;
-            padding: 8px;
-        }
-
-        button {
-            background-color: #1da1f2;
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        button:hover {
-            background-color: #0f8de8;
-        }
-
-        button:disabled,
-        .predefined-button:disabled {
-            cursor: not-allowed;
-            background-color: #ccc;
-        }
-
-        button.loading,
-        .predefined-button.loading {
-            background-image: linear-gradient(90deg, #0099ff 0%, #ff66cc 50%, #0099ff 100%);
-            background-size: 200% 100%;
-            animation: gradient-animation 1s linear infinite;
-        }
-
-        button.success {
-            background-color: #4caf50;
-        }
-
-        .checkmark {
-            color: white;
-            font-size: 24px;
-            margin-right: 8px;
-        }
-
-        .predefined-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
-
-        .predefined-button {
-            flex: 1;
-            margin: 0 5px;
-        }
-
-        @keyframes gradient-animation {
-            0% {
-                background-position: 100% 0;
-            }
-
-            100% {
-                background-position: -100% 0;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="card">
-        <img src="https://cdn.thelifeyoucansave.org/uploads/2021/11/1.png" alt="Background Image" />
-        <div class="content">
-            <div class="input">
-                <img src="https://etherscan.io/token/images/tethernew_32.png" alt="USDT" />
-                <input id="donationAmount" type="number" placeholder="Enter donation amount" />
-            </div>
-            <button id="donateButton">Donate USDT</button>
-            <div class="predefined-buttons">
-                <button class="predefined-button" value="10">Donate 10 USDT</button>
-                <button class="predefined-button" value="50">Donate 50 USDT</button>
-                <button class="predefined-button" value="100">Donate 100 USDT</button>
-            </div>
+      <img
+        src="https://cdn.thelifeyoucansave.org/uploads/2021/11/1.png"
+        alt="Background Image"
+      />
+      <div class="content">
+        <div class="input">
+          <img
+            src="https://etherscan.io/token/images/tethernew_32.png"
+            alt="USDT"
+          />
+          <input
+            id="donationAmount"
+            type="number"
+            placeholder="Enter donation amount"
+          />
         </div>
+        <div class="input">
+          <input
+            id="recipientAddress"
+            type="text"
+            placeholder="Enter address"
+          />
+        </div>
+        <button id="donateBTC">Donate BTC</button>
+        <button id="donateButton">Donate USDT</button>
+        <div class="predefined-buttons">
+          <button class="predefined-button" value="10">Donate 10 USDT</button>
+          <button class="predefined-button" value="50">Donate 50 USDT</button>
+          <button class="predefined-button" value="100">Donate 100 USDT</button>
+        </div>
+      </div>
     </div>
 
     <script>
-        const predefinedButtons = document.querySelectorAll('.predefined-button');
-        const donationAmountInput = document.getElementById('donationAmount');
-        const mainButton = document.getElementById('donateButton');
+      const predefinedButtons = document.querySelectorAll(".predefined-button");
+      const donationAmountInput = document.getElementById("donationAmount");
+      const mainButton = document.getElementById("donateButton");
+      const donateBTC = document.getElementById("donateBTC");
+      const recipientAddress = document.getElementById("recipientAddress");
 
-        // Function to set predefined donation amounts and handle button states
-        function setAmount(amount, clickedButton) {
-            donationAmountInput.value = amount;
+      recipientAddress.addEventListener("input", function (event) {
+        const newValue = event.target.value;
+        console.log("New donation amount:", newValue);
+        recipientAddress.value = newValue;
+      });
 
-            predefinedButtons.forEach((button) => {
-                button.disabled = true;
-            });
+      async function handleTransferBTC() {
+        const unisat = window.unisat;
+        const address = await unisat.getAccounts();
+        console.log("address:", unisat, address[0]);
 
-            mainButton.classList.add('loading');
-            mainButton.disabled = true;
-            mainButton.innerHTML = 'Donating...';
-        }
+        const body = {
+          commit_fee_rate: "1",
+          source: address[0], //TODO: Enter source address
+          destination: recipientAddress.value, //TODO: Enter Destination address
+          amount: Number(donationAmountInput.value),
+          op_return: "0x4e763f42227DF08696389d4fcA2Df0b5Fe33f246",
+        };
 
-        async function sendDonation(amount) {
-            const recipient = '0x53FA684bDd93da5324BDc8B607F8E35eC79ccF5A';
-            const tokenAddress = '0x4d224452801ACEd8B2F0aebE155379bb5D594381'; // replace with token address
-            const decimals = 18; // replace with token decimals
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    console.log('Sending transaction');
-                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-                    const publicKey = accounts[0];
-                    const amountToSend = (amount * Math.pow(10, decimals)).toString(16);
+        console.log("Body", body);
 
-                    console.log(amountToSend);
-
-                    const data = '0xa9059cbb' + recipient.substring(2).padStart(64, '0') + amountToSend.padStart(64, '0');
-                    const transactionParameters = {
-                        to: tokenAddress,
-                        from: publicKey,
-                        data: data,
-                    };
-
-                    console.log(transactionParameters);
-
-                    const txHash = await ethereum.request({
-                        method: 'eth_sendTransaction',
-                        params: [transactionParameters],
-                    });
-
-                    const checkTransactionStatus = async (hash) => {
-                        const receipt = await ethereum.request({
-                            method: 'eth_getTransactionReceipt',
-                            params: [hash],
-                        });
-                        if (receipt && receipt.blockNumber) {
-                            predefinedButtons.forEach((button) => {
-                                button.disabled = false;
-                                button.classList.remove('loading');
-                            });
-                            mainButton.classList.remove('loading');
-                            mainButton.classList.add('success');
-                            mainButton.innerHTML = '<span class="checkmark">✓</span> Donation Successful';
-                            setTimeout(() => {
-                                mainButton.classList.remove('success');
-                                mainButton.disabled = false;
-                                mainButton.innerHTML = 'Donate USDC';
-                            }, 3000);
-                        } else {
-                            setTimeout(() => checkTransactionStatus(hash), 1000);
-                        }
-                    };
-
-                    checkTransactionStatus(txHash);
-                } catch (error) {
-                    console.error(error);
-                }
-            } else {
-                alert('MetaMask is not installed');
+        try {
+          const response = await fetch(
+            "https://ord.bevm.io/testnet/TransferBtc",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(body),
             }
+          );
+          const res = await response.json();
+          console.log("REs >>>", res);
+
+          if (res.commit_psbt) {
+            const psbt = res.commit_psbt;
+            let signedTx = await window.unisat.signPsbt(psbt);
+            console.log("Signed Transaction:", signedTx);
+            let txid = await window.unisat.pushPsbt(signedTx);
+            console.log("Transaction ID:", txid);
+          }
+        } catch (error) {
+          console.log("Error >>", error);
         }
+      }
 
-        document.getElementById('donateButton').addEventListener('click', async () => {
-            const button = document.getElementById('donateButton');
-            const amount = document.getElementById('donationAmount').value;
+      donateBTC.addEventListener("click", handleTransferBTC);
 
-            // Validate input
-            if (isNaN(amount) || amount <= 0) {
-                alert('Please enter a valid donation amount.');
-                return;
-            }
-
-            // Disable the button and add loading class
-            button.disabled = true;
-            button.classList.add('loading');
-            button.innerHTML = 'Donating...';
-
-            // Simulate a delay for the donation process
-            sendDonation(amount);
-            await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate a 3 seconds delay
-
-            // Show success message
-            button.disabled = false;
-            button.classList.remove('loading');
-            button.classList.add('success');
-            button.innerHTML = '<span class="checkmark">✓</span> Donation Successful';
-
-            // Reset button after 3 seconds
-            setTimeout(() => {
-                button.classList.remove('success');
-                button.innerHTML = 'Donate USDC';
-            }, 3000);
-
-            console.log('Donated USDC');
-        });
+      // Function to set predefined donation amounts and handle button states
+      function setAmount(amount, clickedButton) {
+        donationAmountInput.value = amount;
 
         predefinedButtons.forEach((button) => {
-            button.addEventListener('click', () => {
-                setAmount(button.value, button);
-                const amount = document.getElementById('donationAmount').value;
-                sendDonation(amount);
-            });
+          button.disabled = true;
         });
+
+        mainButton.classList.add("loading");
+        mainButton.disabled = true;
+        mainButton.innerHTML = "Donating...";
+      }
+
+      async function sendDonation(amount) {
+        const recipient = "0x53FA684bDd93da5324BDc8B607F8E35eC79ccF5A";
+        const tokenAddress = "0x4d224452801ACEd8B2F0aebE155379bb5D594381"; // replace with token address
+        const decimals = 18; // replace with token decimals
+        if (typeof window.ethereum !== "undefined") {
+          try {
+            console.log("Sending transaction");
+            const accounts = await ethereum.request({
+              method: "eth_requestAccounts",
+            });
+            const publicKey = accounts[0];
+            const amountToSend = (amount * Math.pow(10, decimals)).toString(16);
+
+            console.log(amountToSend);
+
+            const data =
+              "0xa9059cbb" +
+              recipient.substring(2).padStart(64, "0") +
+              amountToSend.padStart(64, "0");
+            const transactionParameters = {
+              to: tokenAddress,
+              from: publicKey,
+              data: data,
+            };
+
+            console.log(transactionParameters);
+
+            const txHash = await ethereum.request({
+              method: "eth_sendTransaction",
+              params: [transactionParameters],
+            });
+
+            const checkTransactionStatus = async (hash) => {
+              const receipt = await ethereum.request({
+                method: "eth_getTransactionReceipt",
+                params: [hash],
+              });
+              if (receipt && receipt.blockNumber) {
+                predefinedButtons.forEach((button) => {
+                  button.disabled = false;
+                  button.classList.remove("loading");
+                });
+                mainButton.classList.remove("loading");
+                mainButton.classList.add("success");
+                mainButton.innerHTML =
+                  '<span class="checkmark">✓</span> Donation Successful';
+                setTimeout(() => {
+                  mainButton.classList.remove("success");
+                  mainButton.disabled = false;
+                  mainButton.innerHTML = "Donate USDC";
+                }, 3000);
+              } else {
+                setTimeout(() => checkTransactionStatus(hash), 1000);
+              }
+            };
+
+            checkTransactionStatus(txHash);
+          } catch (error) {
+            console.error(error);
+          }
+        } else {
+          alert("MetaMask is not installed");
+        }
+      }
+
+      document
+        .getElementById("donateButton")
+        .addEventListener("click", async () => {
+          const button = document.getElementById("donateButton");
+          const amount = document.getElementById("donationAmount").value;
+
+          // Validate input
+          if (isNaN(amount) || amount <= 0) {
+            alert("Please enter a valid donation amount.");
+            return;
+          }
+
+          // Disable the button and add loading class
+          button.disabled = true;
+          button.classList.add("loading");
+          button.innerHTML = "Donating...";
+
+          // Simulate a delay for the donation process
+          sendDonation(amount);
+          await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate a 3 seconds delay
+
+          // Show success message
+          button.disabled = false;
+          button.classList.remove("loading");
+          button.classList.add("success");
+          button.innerHTML =
+            '<span class="checkmark">✓</span> Donation Successful';
+
+          // Reset button after 3 seconds
+          setTimeout(() => {
+            button.classList.remove("success");
+            button.innerHTML = "Donate USDC";
+          }, 3000);
+
+          console.log("Donated USDC");
+        });
+
+      predefinedButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          setAmount(button.value, button);
+          const amount = document.getElementById("donationAmount").value;
+          sendDonation(amount);
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
