@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
   images: {
     domains: ['s2.coinmarketcap.com', 'another-domain.com', 'example.com', 'assets.coingecko.com', 'raw.githubusercontent.com', 't4.ftcdn.net'],
   },
