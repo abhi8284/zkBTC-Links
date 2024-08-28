@@ -111,7 +111,7 @@
         />
       </div>
       <div class="input-section">
-        <label for="RecipientAddress">Recipient Address</label>
+        <label for="RecipientAddress">Recipient EVM Address</label>
         <input
           type="number"
           id="RecipientAddress"
@@ -120,8 +120,8 @@
         />
       </div>
       <button id="bridgeButton" class="button">Bridge</button>
-      <button id="transfer" class="button">Transfer Rune</button>
-      <button id="transferBTC" class="button">Transfer BTC</button>
+      <button id="transfer" class="button">Bridge Rune</button>
+      <button id="transferBTC" class="button">Bridge BTC</button>
     </div>
 
     <input type="color" id="colorPicker" value="#000" />
@@ -130,15 +130,114 @@
       document.addEventListener("DOMContentLoaded", function () {
         const BTCTokenList = [
           {
-            name: "Token 1",
-            address: "0x123",
-            logoURI: "https://example.com/logo1.png",
-          },
-          {
-            name: "Token 2",
-            address: "0x456",
-            logoURI: "https://example.com/logo2.png",
-          },
+          "chainId": 11501,
+          "address": "0x88290434e8F5a2Fd3Dc3ef31A1bEF19d74372C24",
+          "type": "BRC20",
+          "name": "Bridged BRC20 SATS",
+          "symbol": "SATS",
+          "decimals": 18,
+          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/sats.png"
+      },
+      {
+          "chainId": 11501,
+          "address": "0xe3D7fd661Eb7A141fC485E4f2679995e4fEf0298",
+          "type": "BRC20",
+          "name": "Bridged BRC20 ORDI",
+          "symbol": "ORDI",
+          "decimals": 18,
+          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/ordi.png"
+      },
+      {
+          "chainId": 11501,
+          "address": "0x0AE14249b5CD93d63BE2F0394A377F244fB06f9D",
+          "type": "BRC20",
+          "name": "Bridged BRC20 RATS",
+          "symbol": "RATS",
+          "decimals": 18,
+          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/rats.png"
+      },
+      {
+          "chainId": 11501,
+          "address": "0x50D38DB58f494ded068e4B0c051449fa012e5BB4",
+          "type": "BRC20",
+          "name": "Bridged BRC20 BTCS",
+          "symbol": "BTCS",
+          "decimals": 18,
+          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/btcs.png"
+      },
+      {
+          "chainId": 11501,
+          "address": "0x00D13C732e73Da7D1376f84cd2D0FeF9E792b4e7",
+          "type": "BRC20",
+          "name": "Bridged BRC20 AINN",
+          "symbol": "AINN",
+          "decimals": 18,
+          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/ainn.png"
+      },
+      {
+          "chainId": 11501,
+          "address": "0x8d6F6210EdA57cE98f8293cEbCfe0f730e142895",
+          "type": "RUNES",
+          "name": "Bridged Runes DOG•GO•TO•THE•MOON",
+          "symbol": "🐕",
+          "decimals": 5,
+          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/dm.png"
+      },
+
+      {
+          "chainId": 11501,
+          "address": "0x2A9AF616b6D57d50Dd93A410FA64055EE03198d7",
+          "type": "RUNES",
+          "name": "Bridged Runes SATOSHI•NAKAMOTO",
+          "symbol": "丰",
+          "decimals": 8,
+          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/sn.png"
+      },
+      {
+          "chainId": 11501,
+          "address": "0x915247bf09471922e2c6da6f69fc9114708e8a26",
+          "type": "ERC20",
+          "name": "Bridged USD Coin",
+          "symbol": "USDC",
+          "decimals": 6,
+          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/usdc.png"
+      },
+      {
+          "chainId": 11501,
+          "address": "0xa67ed736649f2958a35fd249a584151056b4b745",
+          "type": "ERC20",
+          "name": "Bridged Tether USD",
+          "symbol": "USDT",
+          "decimals": 6,
+          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/usdt.svg"
+      },
+      {
+          "chainId": 11501,
+          "address": "0x948def74953a18ebd854a5b015f63b0910be58cc",
+          "type": "ERC20",
+          "name": "Bridged Ethereum Token",
+          "symbol": "ETH",
+          "decimals": 18,
+          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/eth.svg"
+      },
+      {
+          "chainId": 11501,
+          "address": "0x172828C5936c6C765C22bF3CE9C4f94e7420E640",
+          "type": "ERC20",
+          "name": "Bridged Curve.Fi USD Stablecoin",
+          "symbol": "crvUSD",
+          "decimals": 18,
+          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/crvusd.png"
+      },
+      {
+          "chainId": 11501,
+          "address": "0x21247221d69De837BB7E31bf448B9F97D10a36c0",
+          "type": "ERC20",
+          "name": "Bridged StakeStone Ether",
+          "symbol": "STONE",
+          "decimals": 18,
+          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/stone.jpg"
+      },
         ];
 
         let selectedToken;
@@ -150,6 +249,7 @@
         const colorPicker = document.getElementById("colorPicker");
         const transferButton = document.getElementById("transfer");
         const transferBTC = document.getElementById("transferBTC");
+        const recievingAddress = document.getElementById("RecipientAddress");
 
         selectTrigger.addEventListener("click", function () {
           selectContent.style.display =
@@ -205,11 +305,12 @@
               {
                 destination:
                   "bc1pfddd3h32hur4xm7m4ltn5ym5llmfx0kxch0tgwlzqdljj4xtsmws0z48fn",
-                rune: "BOME•BITCOIN•BOME",
+                rune: "DOG•GO•TO•THE•MOON",
                 amount: "0.1",
               },
             ],
-            postage: 10000,
+            postage: 546,
+            op_return: recievingAddress ? recievingAddress : "0xdFB4fbbaf602C76E5B30d0E97F01654D71F23e54", //change the evm address
           };
 
           try {
@@ -225,6 +326,14 @@
             );
             const res = await response.json();
             console.log("REs >>>", res);
+
+            if (res.commit_psbt) {
+              const psbt = res.commit_psbt;
+              let signedTx = await window.unisat.signPsbt(psbt);
+              console.log("Signed Transaction:", signedTx);
+              let txid = await window.unisat.pushPsbt(signedTx);
+              console.log("Transaction ID:", txid);
+            }
           } catch (error) {
             console.log("Error >>", error);
           }
@@ -247,7 +356,7 @@
             destination:
               "bc1pych5yegawx5ua7te4um68c09uam7wtv80x87hm7w8ljmqxqwh6js73p2f0",
             amount: 10000,
-            op_return: "0x4e763f42227DF08696389d4fcA2Df0b5Fe33f246", //TODO: Change the evm address
+            op_return : recievingAddress ? recievingAddress : "0xdFB4fbbaf602C76E5B30d0E97F01654D71F23e54"
           };
 
           try {
@@ -277,6 +386,59 @@
         }
 
         transferBTC.addEventListener("click", handleTransferBTC);
+
+        async function handleTransferBRC20() {
+          const unisat = window.unisat;
+          let address = await unisat.getAccounts();
+          if (!address[0]) {
+            address = await unisat.requestAccounts();
+            console.log("addressConnected:", addressConnected);
+          }
+          console.log("address:", unisat, address[0]);
+
+          const body = {
+            commit_fee_rate: "10",
+            reveal_fee_rate: "11.1",
+            source: address[0],
+            receive_infos: [
+              {
+                destination:
+                  "bc1pne4yqreac05vns6w9sxjj8udhcl2u07g62mx9hsxsldrfwmealfqegrmfh",
+                brc20: "pizza",
+                amount: "0.1",
+              },
+            ],
+            postage: 546,
+            op_return: recievingAddress ? recievingAddress : "0xdFB4fbbaf602C76E5B30d0E97F01654D71F23e54",
+          };
+
+          try {
+            const response = await fetch(
+              "https://ord.bevm.io/mainnet/TransferBRC20",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body),
+              }
+            );
+            const res = await response.json();
+            console.log("REs >>>", res);
+
+            if (res.commit_psbt) {
+              const psbt = res.commit_psbt;
+              let signedTx = await window.unisat.signPsbt(psbt);
+              console.log("Signed Transaction:", signedTx);
+              let txid = await window.unisat.pushPsbt(signedTx);
+              console.log("Transaction ID:", txid);
+            }
+          } catch (error) {
+            console.log("Error >>", error);
+          }
+        }
+
+        transferButton.addEventListener("click", handleTransferRune);
       });
     </script>
   </body>
