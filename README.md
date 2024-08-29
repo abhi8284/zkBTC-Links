@@ -1,18 +1,19 @@
 ## What Are Bitcoin Links (BTC-Links)?
 
-Bitcoin Links (BTC-Links) is a project that aims to make Bitcoin transactions and interactions more accessible to web2 users by providing a simple and intuitive interface. Inspired by Solana's Blinks and Actions, BTC-Links allows users to perform various Bitcoin-related actions, such as transferring Runes and BRC-20 tokens, from any supported Bitcoin L2 networks with ease. Including Zk-BTC , BEVM etc.
+Bitcoin Links (BTC-Links) is a project that aims to make Bitcoin transactions and interactions more accessible to web2 users by providing a simple and intuitive interface. 
+
+Inspired by Solana's Blinks and Actions, BTC-Links allows users to perform various Bitcoin-related actions, such as transferring Runes and BRC-20 tokens, from any supported Bitcoin L2 networks with ease. Including Zk-BTC , BEVM etc.
 
 ## Key Features of BTC-Links
 
-1. **Seamless Token Transfers**: BTC-Links enables users to transfer Runes and BRC-20 tokens from any supported Bitcoin-L2 networks to their desired destination with just a few clicks.
+1. **Seamless Token Transfers**: BTC-Links enables users to transfer Runes and BRC-20 tokens from any supported Bitcoin-L2 networks to their desired destination with just a few clicks straight from their Social Media, making it mainstream.
 
 2. **Intuitive User Interface**: The project offers a clean and user-friendly interface that simplifies Bitcoin interactions, making it more accessible to web2 users who may be new to the cryptocurrency space.
 
-3. **Cross-Network Compatibility**: BTC-Links supports multiple networks, allowing users to transfer tokens across different blockchains, such as Bitcoin and Ethereum.
+3. **Cross-Network Compatibility**: BTC-Links supports multiple networks, allowing users to transfer tokens across different blockchains, such as Bitcoin and BEVM.
 
 4. **Secure Transactions**: The project prioritizes user security by implementing robust measures to ensure the safety of transactions and user funds.
 
-5. **Decentralization**: BTC-Links is built on decentralized principles, leveraging the power of the Bitcoin network to provide a secure and transparent platform for token transfers.
 
 ## How Does BTC-Links Work?
 
@@ -33,6 +34,6 @@ BTC-Links operates by providing a user-friendly interface that connects to the B
 Bitcoin Links (BTC-Links) is a promising project that aims to bring the benefits of Bitcoin and its associated tokens to a wider audience. By simplifying the transaction process and providing a user-friendly interface, BTC-Links has the potential to drive greater adoption of Bitcoin and its associated technologies in the web2 space.
 
 
-## Chains
+## Chains Supported
 
-zkbtc 
+zkbtc - https://devilmorallyelephant-blockscout.eu-north-2.gateway.fm/tx/0x900fa211a591fb8550aff67c59da39155a394e070763fb1327967a0fce623048

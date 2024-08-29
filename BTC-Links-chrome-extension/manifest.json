@@ -17,8 +17,7 @@
         "*://*.x.com/*"
       ],
       "js": [
-        "content.js",
-        "react.js"
+        "content.js"
       ]
     }
   ],
