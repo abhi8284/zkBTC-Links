@@ -13,9 +13,10 @@ function CreateBlink1({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
   }
 
   return (
-    <div style={{height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" , zoom:"0.7"}} >
-            <h4 style={{marginTop: "50px"}}>Choose a Template For Creating your BTC Link</h4>
-
+    <div style={{ height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", zoom: "0.7" }} >
+      <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight mt-8">
+        Choose a Template For Creating your BTC Link
+      </h3>
       <div style={{ display: "flex", flexDirection: "row", justifyContent: 'space-between', alignItems: 'center', marginTop: '40px' }}>
         {Object.keys(templates).map((template, index) => (
           <div
@@ -31,17 +32,17 @@ function CreateBlink1({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              flexDirection:'column'
+              flexDirection: 'column'
             }}
             onClick={() => updateBlinkObjectTemplate(index + 1, template)}
           >
-            <a style={{marginBottom:"20px", fontSize:"1.2em", fontWeight:"bold"}}>{templates[template].name}</a>
+            <a style={{ marginBottom: "20px", fontSize: "1.2em", fontWeight: "bold" }}>{templates[template].name}</a>
             <div dangerouslySetInnerHTML={{ __html: templates[template].html }} />
           </div>
         ))}
       </div>
       <button
-        style={{ color: 'white', marginTop: 10, fontSize: "1.2em", padding: "10px", borderRadius: "5px", cursor: "pointer", backgroundColor: currentBlinkObjectState ? "#4b8cd0" : "black", width:"250px", height:"50px" }}
+        style={{ color: 'white', marginTop: 10, fontSize: "1.2em", padding: "10px", borderRadius: "5px", cursor: "pointer", backgroundColor: currentBlinkObjectState ? "#4b8cd0" : "black", width: "250px", height: "50px" }}
         onClick={handleNextClick}
         disabled={!currentBlinkObjectState}
       >

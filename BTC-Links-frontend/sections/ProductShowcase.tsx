@@ -1,14 +1,15 @@
 "use client";
 import productImage from "@/assets/product-image.png";
+import Templates from "@/assets/Templates.png";
 import pyramidImage from "@/assets/pyramid.png";
 import tubeImage from "@/assets/tube.png";
 import Image from "next/image";
-import {motion, useScroll, useTransform} from "framer-motion";
-import {useRef} from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export const ProductShowcase = () => {
     const sectionRef = useRef(null);
-    const {scrollYProgress} = useScroll({
+    const { scrollYProgress } = useScroll({
         target: sectionRef,
         offset: ["start end", "end start"],
     });
@@ -18,7 +19,7 @@ export const ProductShowcase = () => {
             <div className="container">
                 <div className="section-heading">
                     <div className="flex justify-center">
-                        <div className="tag">Boost your productivity</div>
+                        <div className="tag">BTC Links or Blinks</div>
                     </div>
                     <h2 className="section-title mt-5">A more effective way to track progress</h2>
                     <p className="section-description mt-5">
@@ -27,7 +28,7 @@ export const ProductShowcase = () => {
                     </p>
                 </div>
                 <div className="relative">
-                    <Image src={productImage} alt="Product Image" className="mt-10" />
+                    <Image src={Templates} alt="Templates Image" className="mt-10 rounded-3xl" />
                     <motion.img
                         src={pyramidImage.src}
                         alt="Pyramid Image"

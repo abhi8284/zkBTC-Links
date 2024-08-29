@@ -11,6 +11,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 
 export const Hero = () => {
   const heroRef = useRef(null);
@@ -38,7 +39,9 @@ export const Hero = () => {
               successes.
             </p>
             <div className="flex gap-1 items-center mt-[30px]">
-              <button className="btn btn-primary">Get Started</button>
+              <Link href="/create" >
+                <button className="btn btn-primary">Get Started</button>
+              </Link>
               <button className="btn btn-text gap-1">
                 <span>Learn more</span>
                 <ArrowIcon className="h-5 w-5" />

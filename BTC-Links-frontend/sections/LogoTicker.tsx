@@ -1,10 +1,12 @@
 "use client";
-import acmeLogo from "@/assets/logo-acme.png";
-import quantumLogo from "@/assets/logo-quantum.png";
-import echoLogo from "@/assets/logo-echo.png";
-import celestialLogo from "@/assets/logo-celestial.png";
-import pulseLogo from "@/assets/logo-pulse.png";
-import apexLogo from "@/assets/logo-apex.png";
+
+import ZKBtc from '@/assets/zkbtc.png'
+import ParticleAuth from '@/assets/ParticleAuth.png'
+import Bevm from '@/assets/BEVM.png'
+import BobChain from '@/assets/BobChain.png'
+import PwrBlack from '@/assets/PwrBlack.png'
+import Bitcoin from '@/assets/Bitcoin+.png'
+import Zulu from '@/assets/zulu-brand.png'
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -26,67 +28,71 @@ export const LogoTicker = () => {
             }}
           >
             <Image
-              src={acmeLogo}
-              alt="Acme Logo"
+              src={PwrBlack}
+              alt="Pwr Logo"
               className="logo-ticker-image"
             />
             <Image
-              src={quantumLogo}
-              alt="Quantum Logo"
+              src={ZKBtc}
+              alt="ZKBtc Logo"
+              className="logo-ticker-image bg-black"
+            />
+            <Image
+              src={ParticleAuth}
+              alt="ParticleAuth Logo"
               className="logo-ticker-image"
             />
             <Image
-              src={echoLogo}
-              alt="Echo Logo"
-              className="logo-ticker-image"
-            />
-            <Image
-              src={celestialLogo}
-              alt="Celestial Logo"
-              className="logo-ticker-image"
-            />
-            <Image
-              src={pulseLogo}
-              alt="Pulse Logo"
-              className="logo-ticker-image"
-            />
-            <Image
-              src={apexLogo}
-              alt="Apex Logo"
+              src={Bevm}
+              alt="Bevm Logo"
               className="logo-ticker-image"
             />
 
-            {/* Second set of logos for animation */}
             <Image
-              src={acmeLogo}
-              alt="Acme Logo"
+              src={Zulu}
+              alt="Zulu Logo"
+              className="logo-ticker-image"
+            />
+
+            <Image
+              src={Bitcoin}
+              alt="BitcoinLogo"
+              className="logo-ticker-image bg-black"
+            />
+
+            <Image
+              src={PwrBlack}
+              alt="Pwr Logo"
               className="logo-ticker-image"
             />
             <Image
-              src={quantumLogo}
-              alt="Quantum Logo"
+              src={ZKBtc}
+              alt="ZKBtc Logo"
+              className="logo-ticker-image bg-black"
+            />
+            <Image
+              src={ParticleAuth}
+              alt="ParticleAuth Logo"
               className="logo-ticker-image"
             />
             <Image
-              src={echoLogo}
-              alt="Echo Logo"
+              src={Bevm}
+              alt="Bevm Logo"
               className="logo-ticker-image"
             />
+
             <Image
-              src={celestialLogo}
-              alt="Celestial Logo"
+              src={BobChain}
+              alt="BobChain Logo"
               className="logo-ticker-image"
             />
+
             <Image
-              src={pulseLogo}
-              alt="Pulse Logo"
-              className="logo-ticker-image"
+              src={Bitcoin}
+              alt="BitcoinLogo"
+              className="logo-ticker-image bg-black"
             />
-            <Image
-              src={apexLogo}
-              alt="Apex Logo"
-              className="logo-ticker-image"
-            />
+
           </motion.div>
         </div>
       </div>
