@@ -329,101 +329,56 @@
 
         if (!selectedToken || !(donationAmountInput.value > 0)) return;
 
+        const input = {
+          selectedToken,
+          amount: donationAmountInput.value,
+          recipientAddress: recipientAddress.value,
+        };
+
+        console.log("Input body >>>", input);
+
         const unisat = window.unisat;
         const address = await unisat.getAccounts();
         console.log("address:", unisat, address[0]);
 
-        const body = {
-          commit_fee_rate: "1",
-          source: address[0], //TODO: Enter source address
-          destination: recipientAddress.value, //TODO: Enter Destination address
-          amount: Number(donationAmountInput.value),
-          op_return: "0x4e763f42227DF08696389d4fcA2Df0b5Fe33f246",
-        };
+        // const body = {
+        //   commit_fee_rate: "1",
+        //   source: address[0], //TODO: Enter source address
+        //   destination: recipientAddress.value, //TODO: Enter Destination address
+        //   amount: Number(donationAmountInput.value),
+        //   op_return: "0x4e763f42227DF08696389d4fcA2Df0b5Fe33f246",
+        // };
 
-        console.log("Body", body);
+        // console.log("Body", body);
 
-        try {
-          const response = await fetch(
-            // "https://ord.bevm.io/testnet/TransferBtc",
-            "https://ord.bevm.io/mainnet/TransferBRC20",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(body),
-            }
-          );
-          console.log("Res", response);
+        // try {
+        //   const response = await fetch(
+        //     // "https://ord.bevm.io/testnet/TransferBtc",
+        //     "https://ord.bevm.io/mainnet/TransferBRC20",
+        //     {
+        //       method: "POST",
+        //       headers: {
+        //         "Content-Type": "application/json",
+        //       },
+        //       body: JSON.stringify(body),
+        //     }
+        //   );
+        //   console.log("Res", response);
 
-          const res = await response.json();
-          console.log("REs >>>", res);
+        //   const res = await response.json();
+        //   console.log("REs >>>", res);
 
-          if (res.commit_psbt) {
-            const psbt = res.commit_psbt;
-            let signedTx = await window.unisat.signPsbt(psbt);
-            console.log("Signed Transaction:", signedTx);
-            let txid = await window.unisat.pushPsbt(signedTx);
-            console.log("Transaction ID:", txid);
-          }
-        } catch (error) {
-          console.log("Error >>", error);
-        }
+        //   if (res.commit_psbt) {
+        //     const psbt = res.commit_psbt;
+        //     let signedTx = await window.unisat.signPsbt(psbt);
+        //     console.log("Signed Transaction:", signedTx);
+        //     let txid = await window.unisat.pushPsbt(signedTx);
+        //     console.log("Transaction ID:", txid);
+        //   }
+        // } catch (error) {
+        //   console.log("Error >>", error);
+        // }
       }
-
-      // async function handleTransferRune() {
-      //   const unisat = window.unisat;
-      //   let address = await unisat.getAccounts();
-      //   if (!address[0]) {
-      //     address = await unisat.requestAccounts();
-      //     console.log("addressConnected:", addressConnected);
-      //   }
-      //   console.log("address:", unisat, address[0]);
-
-      //   const body = {
-      //     commit_fee_rate: "10",
-      //     reveal_fee_rate: "11.1",
-      //     source: address[0],
-      //     receive_infos: [
-      //       {
-      //         destination:
-      //           "bc1pfddd3h32hur4xm7m4ltn5ym5llmfx0kxch0tgwlzqdljj4xtsmws0z48fn",
-      //         rune: selectedToken.symbol,
-      //         amount: Number(donationAmountInput.value),
-      //       },
-      //     ],
-      //     postage: 546,
-      //     op_return: recipientAddress
-      //       ? recipientAddress.value
-      //       : "0xdFB4fbbaf602C76E5B30d0E97F01654D71F23e54", //change the evm address
-      //   };
-
-      //   try {
-      //     const response = await fetch(
-      //       "https://ord.bevm.io/mainnet/TransferRunes",
-      //       {
-      //         method: "POST",
-      //         headers: {
-      //           "Content-Type": "application/json",
-      //         },
-      //         body: JSON.stringify(body),
-      //       }
-      //     );
-      //     const res = await response.json();
-      //     console.log("REs >>>", res);
-
-      //     if (res.commit_psbt) {
-      //       const psbt = res.commit_psbt;
-      //       let signedTx = await window.unisat.signPsbt(psbt);
-      //       console.log("Signed Transaction:", signedTx);
-      //       let txid = await window.unisat.pushPsbt(signedTx);
-      //       console.log("Transaction ID:", txid);
-      //     }
-      //   } catch (error) {
-      //     console.log("Error >>", error);
-      //   }
-      // }
 
       donateButton.addEventListener("click", handleTransferBTC);
 
