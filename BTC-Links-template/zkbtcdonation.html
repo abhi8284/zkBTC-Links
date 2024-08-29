@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BEVM Donation Page</title>
+    <title>ZKBTC Donation Page</title>
     <style>
       .card {
         font-family: Arial, sans-serif;
@@ -108,6 +108,22 @@
         padding: 8px;
       }
 
+      /* button {
+        background-color: #1da1f2;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      } */
+
       .button {
         padding: 10px 18px;
         border: none;
@@ -204,6 +220,7 @@
         </div>
         <div>
           <button id="donateButton" class="button">Donate</button>
+          <!-- <button id="donateButton" class="button">Donate USDT</button> -->
         </div>
       </div>
     </div>
@@ -221,8 +238,8 @@
 
       const BTCTokenList = [
         {
-          chainId: 11501,
-          address: "0x88290434e8F5a2Fd3Dc3ef31A1bEF19d74372C24",
+          chainId: 19236265,
+          address: "0xC5d579C8948f7Cfa2ec2A931bDB81Fe421427b0c",
           type: "BRC20",
           name: "Bridged BRC20 SATS",
           symbol: "SATS",
@@ -231,37 +248,7 @@
             "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/sats.png",
         },
         {
-          chainId: 11501,
-          address: "0xe3D7fd661Eb7A141fC485E4f2679995e4fEf0298",
-          type: "BRC20",
-          name: "Bridged BRC20 ORDI",
-          symbol: "ORDI",
-          decimals: 18,
-          logoURI:
-            "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/ordi.png",
-        },
-        {
-          chainId: 11501,
-          address: "0x0AE14249b5CD93d63BE2F0394A377F244fB06f9D",
-          type: "BRC20",
-          name: "Bridged BRC20 RATS",
-          symbol: "RATS",
-          decimals: 18,
-          logoURI:
-            "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/rats.png",
-        },
-        {
-          chainId: 11501,
-          address: "0x50D38DB58f494ded068e4B0c051449fa012e5BB4",
-          type: "BRC20",
-          name: "Bridged BRC20 BTCS",
-          symbol: "BTCS",
-          decimals: 18,
-          logoURI:
-            "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/btcs.png",
-        },
-        {
-          chainId: 11501,
+          chainId: 19236265,
           address: "0x8d6F6210EdA57cE98f8293cEbCfe0f730e142895",
           type: "RUNES",
           name: "Bridged Runes DOG•GO•TO•THE•MOON",
@@ -270,10 +257,9 @@
           logoURI:
             "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/dm.png",
         },
-
         {
-          chainId: 11501,
-          address: "0x2A9AF616b6D57d50Dd93A410FA64055EE03198d7",
+          chainId: 19236265,
+          address: "0x42CCc04D3557A7fbC2f2F7Cbe41869834c373896",
           type: "RUNES",
           name: "Bridged Runes SATOSHI•NAKAMOTO",
           symbol: "SATOSHI•NAKAMOTO",
@@ -282,6 +268,7 @@
             "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/sn.png",
         },
       ];
+
 
       selectTrigger.addEventListener("click", function () {
         selectContent.style.display =
