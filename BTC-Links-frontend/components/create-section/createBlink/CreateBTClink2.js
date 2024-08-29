@@ -397,8 +397,6 @@ function CreateBlink2({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
     />
   </div>
 )}
-
-
         </>
       )}
 
