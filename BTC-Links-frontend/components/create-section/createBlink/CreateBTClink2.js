@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import EditElement from '@/components/EditElement';
 import templates from '@/assets/BTClinkTemplates.json';
+import EditElement from '@/components/EditElement';
 import Loader1 from '@/components/Loader1';
 import { saveAs } from 'file-saver';
 
@@ -19,15 +19,29 @@ function CreateBlink2({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
   const [destinationAddress, setDestinationAddress] = useState('');
   const [destinationDecimals, setDestinationDecimals] = useState('');
   const [recipient, setRecipient] = useState("0x000000000000000000000000000000000");
+  const [hasRenderedTemplate, setHasRenderedTemplate] = useState(false); // State to track if template is rendered
+
   useEffect(() => {
     if (currentBlinkObject.templateName) {
       setSelectedTemplate(currentBlinkObject.templateName);
     }
   }, [currentBlinkObject]);
 
+  useEffect(() => {
+    if (selectedTemplate && !hasRenderedTemplate) {
+      setHasRenderedTemplate(true);
+      const template = templates[selectedTemplate];
+      const templateContainer = document.querySelectorAll('.templateContainer');
+      templateContainer.forEach((container) => {
+        container.innerHTML = template.html;
+      });
+    }
+  }, [selectedTemplate, hasRenderedTemplate]);
+
   const handleTemplateSelect = (templateName) => {
     setSelectedTemplate(templateName);
     setEditingElement(null);
+    setHasRenderedTemplate(false); // Reset template render state when a new template is selected
   };
 
   const handleElementClick = (element) => {
@@ -47,21 +61,30 @@ function CreateBlink2({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
   const handleBgColorChange = (newColor) => {
     setBgColor(newColor);
     if (editingElement) {
-      editingElement.style.backgroundColor = newColor;
+      const elementsInDOM = document.querySelectorAll(`[data-element-id="${editingElement.dataset.elementId}"]`);
+      elementsInDOM.forEach((element) => {
+        element.style.backgroundColor = newColor;
+      });
     }
   };
 
   const handleTextColorChange = (newColor) => {
     setTextColor(newColor);
     if (editingElement) {
-      editingElement.style.color = newColor;
+      const elementsInDOM = document.querySelectorAll(`[data-element-id="${editingElement.dataset.elementId}"]`);
+      elementsInDOM.forEach((element) => {
+        element.style.color = newColor;
+      });
     }
   };
 
   const handleTextChange = (newText) => {
     setText(newText);
     if (editingElement) {
-      editingElement.textContent = newText;
+      const elementsInDOM = document.querySelectorAll(`[data-element-id="${editingElement.dataset.elementId}"]`);
+      elementsInDOM.forEach((element) => {
+        element.textContent = newText;
+      });
     }
   };
 
@@ -71,7 +94,10 @@ function CreateBlink2({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
 
   const updateImageUrl = () => {
     if (editingElement) {
-      editingElement.src = imageUrl;
+      const elementsInDOM = document.querySelectorAll(`[data-element-id="${editingElement.dataset.elementId}"]`);
+      elementsInDOM.forEach((element) => {
+        element.src = imageUrl;
+      });
     }
     setShowTooltip(false);
   };
@@ -85,7 +111,7 @@ function CreateBlink2({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
     const htmlContent = `
       ${editedHtml}
     `;
-  
+
     const modifiedJs = templates[selectedTemplate].js
       .replace('referrer = null', `referrer = "${referrer}";`)
       .replace(
@@ -101,7 +127,7 @@ function CreateBlink2({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
         /const recipient = '0x53FA684bDd93da5324BDc8B607F8E35eC79ccF5A';/,
         `const recipient = '${recipient}';`
       );
-  
+
     const iFrame = { iframe: { html: htmlContent, js: modifiedJs } };
 
     // use a deployed backend instead
@@ -116,17 +142,15 @@ function CreateBlink2({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
     console.log(htmlContent);
     let ipfsText = await res.text();
     setNewIPFShash(ipfsText);
-  
+
     handleNextClick();
   };
-  
+
   const handleDeployClick = async () => {
     setIsLoading(true);
     createBlink();
     await new Promise((resolve) => setTimeout(resolve, 4000)); // Simulate 5 seconds delay
     setIsLoading(false);
-
-
   };
 
   const handleDownloadClick = () => {
@@ -140,10 +164,10 @@ function CreateBlink2({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
   <title>Custom Component</title>
   <style>
     body {
-      
+
     }
     .templateContainer {
-     
+
     }
   </style>
 </head>
@@ -188,7 +212,6 @@ function CreateBlink2({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
               <div
                 className="templateContainer"
                 style={{ ...styles.templateContainer, marginTop: '0px' }}
-                dangerouslySetInnerHTML={{ __html: templates[selectedTemplate].html }}
                 onClick={(e) => handleElementClick(e.target)}
               />
               {editMode && (
@@ -232,7 +255,7 @@ function CreateBlink2({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
                 <button className="launch-app-button" style={styles.nextButton} onClick={handleDeployClick}>
                   Deploy
                 </button>
-               
+
               </>
             )}
             {editMode && (
@@ -378,7 +401,7 @@ function CreateBlink2({ currentBlinkObject, setCurrentBlinkObject, handleNextCli
 
         </>
       )}
-      
+
     </div>
   );
 }
