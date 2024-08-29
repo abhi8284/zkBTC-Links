@@ -19,7 +19,7 @@ export const ProductShowcase = () => {
             <div className="container">
                 <div className="section-heading">
                     <div className="flex justify-center">
-                        <div className="tag">BTC Links or Blinks</div>
+                        <div className="tag">BTC Links or Bitcoin Links</div>
                     </div>
                     <h2 className="section-title mt-5">A more effective way to track progress</h2>
                     <p className="section-description mt-5">

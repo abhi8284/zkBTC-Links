@@ -8,7 +8,7 @@ const pricingTiers = [
         id: 1,
         title: "Choose template from the give templates",
         monthlyPrice: 0,
-        buttonText: "Get started for free",
+        buttonText: "Checkout the templates",
         popular: false,
         inverse: false,
         features: [
@@ -22,7 +22,7 @@ const pricingTiers = [
         id: 2,
         title: "Edit your settings in the template",
         monthlyPrice: 9,
-        buttonText: "Sign up now",
+        buttonText: "Edit the template",
         popular: false,
         inverse: true,
         features: [
@@ -36,18 +36,18 @@ const pricingTiers = [
         id: 3,
         title: "Voila Done!!",
         monthlyPrice: 19,
-        buttonText: "Sign up now",
+        buttonText: "Deploy now 🔥",
         popular: false,
         inverse: false,
         features: [
             "Done with the template",
-            "Use it to send to your customer",
+            "Deploy it and share on the Social Media",
             //TODO: Add more fields @kamal
         ],
     },
 ];
 
-export const Pricing = () => {
+export const Howitworks = () => {
     return (
         <section className="py-24 bg-white">
             <div className="container">
@@ -90,12 +90,6 @@ export const Pricing = () => {
                                         </motion.span>
                                     </div>
                                 )}
-                            </div>
-                            <div className="flex items-baseline gap-1 mt-[30px]">
-                                <span className="text-4xl font-bold tracking-tighter leading-none">
-                                    ${monthlyPrice}
-                                </span>
-                                <span className="tracking-tight font-bold text-black/50">/month</span>
                             </div>
                             <button
                                 className={twMerge(
