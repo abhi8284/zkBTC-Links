@@ -43,6 +43,7 @@
         width: 100%;
       }
       .select-trigger {
+        width: 100%;
         padding: 16px;
         border: 1px solid #ccc;
         border-radius: 12px;
@@ -182,9 +183,25 @@
       <div class="content">
         <div class="token-selection">
           <label for="token">Select Token</label>
-          <div id="selectTrigger" class="select-trigger">Select</div>
-          <div id="selectContent" class="select-content" style="display: none">
-            <!-- Items will be inserted here by JavaScript -->
+          <div class="bridge-select">
+            <select id="token" class="select-trigger">
+              <option value="" disabled selected>Select a token</option>
+              <option value="0x88290434e8F5a2Fd3Dc3ef31A1bEF19d74372C24">
+                SATS
+              </option>
+              <option value="0xe3D7fd661Eb7A141fC485E4f2679995e4fEf0298">
+                ORDI
+              </option>
+              <option value="0x0AE14249b5CD93d63BE2F0394A377F244fB06f9D">
+                RATS
+              </option>
+              <option value="0x50D38DB58f494ded068e4B0c051449fa012e5BB4">
+                BTCS
+              </option>
+              <option value="0x8d6F6210EdA57cE98f8293cEbCfe0f730e142895">
+                DOG•GO•TO•THE•MOON
+              </option>
+            </select>
           </div>
         </div>
 
@@ -209,7 +226,7 @@
     </div>
 
     <script>
-      let selectedToken;
+      let selectedTokenAddress;
 
       const predefinedButtons = document.querySelectorAll(".predefined-button");
       const donationAmountInput = document.getElementById("donationAmount");
@@ -219,86 +236,11 @@
       const mainButton = document.getElementById("donateButton");
       const donateButton = document.getElementById("donateButton");
 
-      const BTCTokenList = [
-        {
-          chainId: 11501,
-          address: "0x88290434e8F5a2Fd3Dc3ef31A1bEF19d74372C24",
-          type: "BRC20",
-          name: "Bridged BRC20 SATS",
-          symbol: "SATS",
-          decimals: 18,
-          logoURI:
-            "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/sats.png",
-        },
-        {
-          chainId: 11501,
-          address: "0xe3D7fd661Eb7A141fC485E4f2679995e4fEf0298",
-          type: "BRC20",
-          name: "Bridged BRC20 ORDI",
-          symbol: "ORDI",
-          decimals: 18,
-          logoURI:
-            "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/ordi.png",
-        },
-        {
-          chainId: 11501,
-          address: "0x0AE14249b5CD93d63BE2F0394A377F244fB06f9D",
-          type: "BRC20",
-          name: "Bridged BRC20 RATS",
-          symbol: "RATS",
-          decimals: 18,
-          logoURI:
-            "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/rats.png",
-        },
-        {
-          chainId: 11501,
-          address: "0x50D38DB58f494ded068e4B0c051449fa012e5BB4",
-          type: "BRC20",
-          name: "Bridged BRC20 BTCS",
-          symbol: "BTCS",
-          decimals: 18,
-          logoURI:
-            "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/btcs.png",
-        },
-        {
-          chainId: 11501,
-          address: "0x8d6F6210EdA57cE98f8293cEbCfe0f730e142895",
-          type: "RUNES",
-          name: "Bridged Runes DOG•GO•TO•THE•MOON",
-          symbol: "DOG•GO•TO•THE•MOON",
-          decimals: 5,
-          logoURI:
-            "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/dm.png",
-        },
+      const tokenSelect = document.getElementById("token");
 
-        {
-          chainId: 11501,
-          address: "0x2A9AF616b6D57d50Dd93A410FA64055EE03198d7",
-          type: "RUNES",
-          name: "Bridged Runes SATOSHI•NAKAMOTO",
-          symbol: "SATOSHI•NAKAMOTO",
-          decimals: 8,
-          logoURI:
-            "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/sn.png",
-        },
-      ];
-
-      selectTrigger.addEventListener("click", function () {
-        selectContent.style.display =
-          selectContent.style.display === "none" ? "flex" : "none";
-      });
-
-      BTCTokenList.forEach((token) => {
-        const item = document.createElement("div");
-        item.className = "select-item";
-        item.innerHTML = `<img src="${token.logoURI}" alt="${token.name}" width="24"> ${token.name}`;
-        item.addEventListener("click", function () {
-          selectTrigger.innerHTML = `<img src="${token.logoURI}" alt="${token.name}" width="24"> ${token.name}`;
-          selectedToken = token;
-          selectContent.style.display = "none";
-          donateButton.innerHTML = `Donate ${token.name}`;
-        });
-        selectContent.appendChild(item);
+      tokenSelect.addEventListener("change", function () {
+        selectedTokenAddress = this.value;
+        console.log("Selected Token Address:", selectedTokenAddress);
       });
 
       recipientAddress.addEventListener("input", function (event) {
@@ -308,19 +250,23 @@
       });
 
       async function handleTransferBTC() {
-        console.log("seelcted token", selectedToken, donationAmountInput.value);
+        console.log(
+          "seelcted token",
+          selectedTokenAddress,
+          donationAmountInput.value
+        );
 
-        if (!selectedToken || !(donationAmountInput.value > 0)) return;
+        if (!selectedTokenAddress || !(donationAmountInput.value > 0)) return;
 
         const input = {
-          selectedToken,
+          selectedTokenAddress,
           amount: donationAmountInput.value,
           recipientAddress: recipientAddress.value,
         };
 
         console.log("Input body >>>", input);
 
-        const decimals = selectedToken.decimals; // replace with token decimals
+        const decimals = 18; // replace with token decimals
         if (typeof window.ethereum !== "undefined") {
           try {
             console.log("Sending transaction");
@@ -330,7 +276,9 @@
             const publicKey = accounts[0];
 
             console.log("Public Key:", publicKey);
-            const amountToSend = (input.amount * Math.pow(10, decimals)).toString(16);
+            const amountToSend = (
+              input.amount * Math.pow(10, decimals)
+            ).toString(16);
 
             console.log(amountToSend);
 
@@ -340,7 +288,7 @@
               amountToSend.padStart(64, "0");
 
             const transactionParameters = {
-              to: selectedToken.address,
+              to: selectedTokenAddress,
               from: publicKey,
               data: data,
             };
@@ -436,7 +384,6 @@
         mainButton.disabled = true;
         mainButton.innerHTML = "Donating...";
       }
-
 
       predefinedButtons.forEach((button) => {
         button.addEventListener("click", () => {
