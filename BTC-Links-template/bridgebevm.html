@@ -175,7 +175,7 @@
           placeholder="Enter Recipient address"
         />
       </div>
-      <button id="bridgeButton" class="button">Bridge</button>
+      <button id="bridgeButton" class="button">Bridge BRC20</button>
       <button id="transfer" class="button">Bridge Rune</button>
       <button id="transferBTC" class="button">Bridge BTC</button>
     </div>
@@ -185,8 +185,8 @@
         let selectedTokenAddress;
         let amount = 0;
         const amountInput = document.getElementById("amount");
-        const bridgeButton = document.getElementById("bridgeButton");
-        const transferButton = document.getElementById("transfer");
+        const bridgeBRC20Button = document.getElementById("bridgeButton");
+        const transferRunesButton = document.getElementById("transfer");
         const transferBTC = document.getElementById("transferBTC");
         const recievingAddress = document.getElementById("RecipientAddress");
         const tokenSelect = document.getElementById("token");
@@ -200,7 +200,7 @@
           amount = Number(event.target.value);
         });
 
-        bridgeButton.addEventListener("click", function () {
+        bridgeBRC20Button.addEventListener("click", function () {
           if (!selectedTokenAddress || amount === 0) {
             alert("Please select a token and enter a valid amount.");
             return;
@@ -230,7 +230,7 @@
                 destination:
                   "bc1pfddd3h32hur4xm7m4ltn5ym5llmfx0kxch0tgwlzqdljj4xtsmws0z48fn",
                 rune: selectedTokenAddress,
-                amount: amount,
+                amount: amount.toString(),
               },
             ],
             postage: 546,
@@ -263,7 +263,7 @@
           }
         }
 
-        transferButton.addEventListener("click", handleTransferRune);
+        transferRunesButton.addEventListener("click", handleTransferRune);
 
         async function handleTransferBTC() {
           const unisat = window.unisat;
@@ -279,7 +279,7 @@
             source: address[0],
             destination:
               "bc1pych5yegawx5ua7te4um68c09uam7wtv80x87hm7w8ljmqxqwh6js73p2f0",
-            amount: 10000,
+            amount: amount,
             op_return: recievingAddress.value,
           };
 
@@ -318,27 +318,22 @@
             address = await unisat.requestAccounts();
             console.log("addressConnected:", addressConnected);
           }
-          console.log("address:", unisat, address[0]);
+          console.log("address:", unisat, address[0] , selectedTokenAddress);
 
           const body = {
             commit_fee_rate: "10",
             reveal_fee_rate: "11.1",
             source: address[0],
-            receive_infos: [
-              {
-                destination:
-                  "bc1pne4yqreac05vns6w9sxjj8udhcl2u07g62mx9hsxsldrfwmealfqegrmfh",
-                brc20: "pizza",
-                amount: "0.1",
-              },
-            ],
+            destination: "bc1pne4yqreac05vns6w9sxjj8udhcl2u07g62mx9hsxsldrfwmealfqegrmfh",
+            amount: amount.toString(),
+            outpoint: [ selectedTokenAddress],
             postage: 546,
             op_return: recievingAddress.value,
           };
 
           try {
             const response = await fetch(
-              "https://ord.bevm.io/mainnet/TransferBRC20",
+              "https://ord.bevm.io/mainnet/TransferOutpoints",
               {
                 method: "POST",
                 headers: {
@@ -362,7 +357,7 @@
           }
         }
 
-        transferButton.addEventListener("click", handleTransferRune);
+        bridgeBRC20Button.addEventListener("click", handleTransferBRC20);
       });
     </script>
   </body>
