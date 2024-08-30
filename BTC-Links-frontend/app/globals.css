@@ -16,7 +16,7 @@
   }
 
   .logo-ticker-image {
-    @apply h-8 w-auto;
+    @apply h-16 w-auto;
   }
 
   .tag {

@@ -7,15 +7,14 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
         background-color: #f0f0f0;
         margin: 0;
       }
       .card {
         width: 550px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
         background-color: #fff;
         border-radius: 15px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -31,6 +30,16 @@
         align-items: center;
         justify-content: center;
       }
+      .select-trigger {
+        width: 100%;
+        padding: 16px;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
       .gap-4 {
         gap: 16px;
       }
@@ -40,14 +49,12 @@
       .token-selection {
         display: flex;
         flex-direction: column;
+        align-items: baseline;
         gap: 8px;
         width: 100%;
       }
-      .select-trigger {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #fff;
+      .bridge-select {
+        width: 100%;
       }
       .select-content {
         border: 1px solid #ccc;
@@ -55,21 +62,44 @@
         background-color: #fff;
         margin-top: 5px;
       }
+      .input-section {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+      }
+
       .input {
-        padding: 8px;
+        display: flex;
+        align-items: center;
+        background-color: white;
         border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-        margin-top: 8px;
+        border-radius: 12px;
+        padding: 8px;
+        gap: 5px;
+      }
+
+      input[type="number"] {
+        border: none;
+        background-color: transparent;
+        font-size: 16px;
+        flex: 1;
+        padding: 8px;
+      }
+      input[type="text"] {
+        border: none;
+        background-color: transparent;
+        font-size: 16px;
+        flex: 1;
+        padding: 8px;
       }
       .button {
-        padding: 10px 18px;
+        padding: 14px 18px;
         border: none;
         border-radius: 5px;
         background-color: #000;
         color: #fff;
         cursor: pointer;
-        margin-top: 20px;
+        margin-top: 10px;
       }
     </style>
   </head>
@@ -87,7 +117,7 @@
         </div>
         <div class="flex gap-2 items-center">
           <img
-            src="https://assets.coingecko.com/coins/images/37804/standard/WBTC.png?1715591247"
+            src="https://avatars.githubusercontent.com/u/138027177?s=280&v=4"
             alt="BEVM"
             width="40"
           />
@@ -95,14 +125,41 @@
         </div>
       </div>
       <div class="token-selection">
-        <label for="token">Select Token</label>
-        <div id="selectTrigger" class="select-trigger">Select</div>
-        <div id="selectContent" class="select-content" style="display: none">
-          <!-- Items will be inserted here by JavaScript -->
+        <div class="bridge-select">
+          <select id="token" class="select-trigger">
+            <option value="" disabled selected>Select a token</option>
+            <option
+              value="9b664bdd6f5ed80d8d88957b63364c41f3ad4efb8eee11366aa16435974d9333i0"
+            >
+              BRC20_SATS
+            </option>
+            <option
+              value="b61b0172d95e266c18aea0c624db987e971a5d6d4ebc2aaed85da4642d635735i0"
+            >
+              BRC20_ORDI
+            </option>
+            <option
+              value="77df24c9f1bd1c6a606eb12eeae3e2a2db40774d54b839b5ae11f438353ddf47i0"
+            >
+              BRC20_ RATS
+            </option>
+            <option
+              value="edc052335f914ee47a758cff988494fbb569d820e66ac8581008e44b26dcdb43i0"
+            >
+              BRC20_BTCS
+            </option>
+            <option
+              value="00eeaf44729e61190a34cb01d8230b68285c576568b7314dfbc0ee98a84a7128i0"
+            >
+              BRC20_AINN
+            </option>
+            <option value="DOG•GO•TO•THE•MOON">RUNES_DOG•GO•TO•THE•MOON</option>
+            <option value="SATOSHI•NAKAMOT0">RUNES_SATOSHI•NAKAMOT0</option>
+          </select>
         </div>
       </div>
-      <div class="input-section">
-        <label for="amount">Amount</label>
+
+      <div class="input">
         <input
           type="number"
           id="amount"
@@ -110,159 +167,33 @@
           placeholder="Enter Amount"
         />
       </div>
-      <div class="input-section">
-        <label for="RecipientAddress">Recipient EVM Address</label>
+      <div class="input">
         <input
           type="text"
           id="RecipientAddress"
           class="input"
-          placeholder="Enter address"
+          placeholder="Enter Recipient address"
         />
       </div>
       <button id="bridgeButton" class="button">Bridge</button>
       <button id="transfer" class="button">Bridge Rune</button>
       <button id="transferBTC" class="button">Bridge BTC</button>
     </div>
-    
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const BTCTokenList = [
-          {
-          "chainId": 11501,
-          "address": "0x88290434e8F5a2Fd3Dc3ef31A1bEF19d74372C24",
-          "type": "BRC20",
-          "name": "Bridged BRC20 SATS",
-          "symbol": "SATS",
-          "decimals": 18,
-          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/sats.png"
-      },
-      {
-          "chainId": 11501,
-          "address": "0xe3D7fd661Eb7A141fC485E4f2679995e4fEf0298",
-          "type": "BRC20",
-          "name": "Bridged BRC20 ORDI",
-          "symbol": "ORDI",
-          "decimals": 18,
-          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/ordi.png"
-      },
-      {
-          "chainId": 11501,
-          "address": "0x0AE14249b5CD93d63BE2F0394A377F244fB06f9D",
-          "type": "BRC20",
-          "name": "Bridged BRC20 RATS",
-          "symbol": "RATS",
-          "decimals": 18,
-          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/rats.png"
-      },
-      {
-          "chainId": 11501,
-          "address": "0x50D38DB58f494ded068e4B0c051449fa012e5BB4",
-          "type": "BRC20",
-          "name": "Bridged BRC20 BTCS",
-          "symbol": "BTCS",
-          "decimals": 18,
-          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/btcs.png"
-      },
-      {
-          "chainId": 11501,
-          "address": "0x00D13C732e73Da7D1376f84cd2D0FeF9E792b4e7",
-          "type": "BRC20",
-          "name": "Bridged BRC20 AINN",
-          "symbol": "AINN",
-          "decimals": 18,
-          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/ainn.png"
-      },
-      {
-          "chainId": 11501,
-          "address": "0x8d6F6210EdA57cE98f8293cEbCfe0f730e142895",
-          "type": "RUNES",
-          "name": "Bridged Runes DOG•GO•TO•THE•MOON",
-          "symbol": "🐕",
-          "decimals": 5,
-          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/dm.png"
-      },
-
-      {
-          "chainId": 11501,
-          "address": "0x2A9AF616b6D57d50Dd93A410FA64055EE03198d7",
-          "type": "RUNES",
-          "name": "Bridged Runes SATOSHI•NAKAMOTO",
-          "symbol": "丰",
-          "decimals": 8,
-          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/sn.png"
-      },
-      {
-          "chainId": 11501,
-          "address": "0x915247bf09471922e2c6da6f69fc9114708e8a26",
-          "type": "ERC20",
-          "name": "Bridged USD Coin",
-          "symbol": "USDC",
-          "decimals": 6,
-          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/usdc.png"
-      },
-      {
-          "chainId": 11501,
-          "address": "0xa67ed736649f2958a35fd249a584151056b4b745",
-          "type": "ERC20",
-          "name": "Bridged Tether USD",
-          "symbol": "USDT",
-          "decimals": 6,
-          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/usdt.svg"
-      },
-      {
-          "chainId": 11501,
-          "address": "0x948def74953a18ebd854a5b015f63b0910be58cc",
-          "type": "ERC20",
-          "name": "Bridged Ethereum Token",
-          "symbol": "ETH",
-          "decimals": 18,
-          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/eth.svg"
-      },
-      {
-          "chainId": 11501,
-          "address": "0x172828C5936c6C765C22bF3CE9C4f94e7420E640",
-          "type": "ERC20",
-          "name": "Bridged Curve.Fi USD Stablecoin",
-          "symbol": "crvUSD",
-          "decimals": 18,
-          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/crvusd.png"
-      },
-      {
-          "chainId": 11501,
-          "address": "0x21247221d69De837BB7E31bf448B9F97D10a36c0",
-          "type": "ERC20",
-          "name": "Bridged StakeStone Ether",
-          "symbol": "STONE",
-          "decimals": 18,
-          "logoURI": "https://raw.githubusercontent.com/btclayer2/bridge-tokenlist/main/asset/stone.jpg"
-      },
-        ];
-
-        let selectedToken;
+        let selectedTokenAddress;
         let amount = 0;
-        const selectTrigger = document.getElementById("selectTrigger");
-        const selectContent = document.getElementById("selectContent");
         const amountInput = document.getElementById("amount");
         const bridgeButton = document.getElementById("bridgeButton");
         const transferButton = document.getElementById("transfer");
         const transferBTC = document.getElementById("transferBTC");
         const recievingAddress = document.getElementById("RecipientAddress");
+        const tokenSelect = document.getElementById("token");
 
-        selectTrigger.addEventListener("click", function () {
-          selectContent.style.display =
-            selectContent.style.display === "none" ? "block" : "none";
-        });
-
-        BTCTokenList.forEach((token) => {
-          const item = document.createElement("div");
-          item.className = "select-item";
-          item.innerHTML = `<img src="${token.logoURI}" alt="${token.name}" width="24"> ${token.name}`;
-          item.addEventListener("click", function () {
-            selectTrigger.innerText = token.name;
-            selectedToken = token;
-            selectContent.style.display = "none";
-          });
-          selectContent.appendChild(item);
+        tokenSelect.addEventListener("change", function () {
+          selectedTokenAddress = this.value;
+          console.log("Selected Token Address:", selectedTokenAddress);
         });
 
         amountInput.addEventListener("input", function (event) {
@@ -270,17 +201,16 @@
         });
 
         bridgeButton.addEventListener("click", function () {
-          if (!selectedToken || amount === 0) {
+          if (!selectedTokenAddress || amount === 0) {
             alert("Please select a token and enter a valid amount.");
             return;
           }
           const input = {
-            selectedToken,
+            selectedTokenAddress,
             amount,
           };
           console.log("input", input);
         });
-
 
         async function handleTransferRune() {
           const unisat = window.unisat;
@@ -299,12 +229,12 @@
               {
                 destination:
                   "bc1pfddd3h32hur4xm7m4ltn5ym5llmfx0kxch0tgwlzqdljj4xtsmws0z48fn",
-                rune: "DOG•GO•TO•THE•MOON",
-                amount: "0.1",
+                rune: selectedTokenAddress,
+                amount: amount,
               },
             ],
             postage: 546,
-            op_return: recievingAddress.value, 
+            op_return: recievingAddress.value,
           };
 
           try {
@@ -343,15 +273,14 @@
             console.log("addressConnected:", addressConnected);
           }
           console.log("address:", unisat, address[0]);
-          console.log(recievingAddress.value,"transfering btc");
+          console.log(recievingAddress.value, "transfering btc");
           const body = {
             commit_fee_rate: "1",
             source: address[0],
             destination:
               "bc1pych5yegawx5ua7te4um68c09uam7wtv80x87hm7w8ljmqxqwh6js73p2f0",
             amount: 10000,
-            op_return : recievingAddress.value
-
+            op_return: recievingAddress.value,
           };
 
           try {
